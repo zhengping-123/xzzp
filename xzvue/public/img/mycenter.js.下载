@@ -1,0 +1,944 @@
+/****异步请求页头、页尾、个人中心主体左侧***/
+//$('#ls_header').load('../data/header.php');
+//$('#ls_footer').load('../data/footer.php');
+//$('#ls_left').load('../data/main_left.php');
+
+$("#iframe>div").wrap("<div></div>");
+/********************个人资料******************/
+
+/**修改头像  点击图像或文字显示修改头像遮罩层**/
+$('.modification').click(function(){
+  $('.head_shade').show();
+})
+/**修改头像遮罩层  ×与取消点击关闭**/
+$('.right').click(function(){
+  $('.head_shade').hide();
+})
+$('.off').click(function(){
+  $('.head_shade').hide();
+})
+// 未点击选择图片前的样式
+$('.m_left').show();
+$('.reupload').hide();
+// 点击选择图片后的样式切换
+$('.before').click(function(){
+  $('.m_left').hide();
+  $('.m_left1').show();
+  $('.reupload').show();
+})
+// 点击重新上传后的样式切换
+$('.reupload').click(function(){
+  $('.m_left').show();
+  $('.m_left1').hide();
+  $('.reupload').hide();
+})
+
+
+/******************账号安全*******************/
+
+/***安全级别------各个级别显示的颜色和文字***/
+/* 低级*/
+// $('.low_color').show();
+// $('.low').show();
+/* 较低级*/
+// $('.lower_color').show();
+// $('.lower').show();
+/* 中级*/
+$('.medium_color').show();
+$('.medium').show();
+/* 较高级*/
+// $('.tall_color').show();
+// $('.tall').show();
+/* 高级*/
+// $('.hight_color').show();
+// $('.hight').show();
+
+/**安全级别后面的安全设置说明**/
+/* 未全部启动*/
+$('.none').show();
+/* 已全部启动*/
+// $('.have').show();
+
+/*登录密码、邮箱验证等前面的验证图标*/
+// $('.yes').show();
+// $('.non').show();
+
+
+/*****登录密码----点击修改******/
+// 1、登录密码修改
+$('.xiu').show();
+// 2、登录密码修改成功
+$('.submit').click(function(){
+  $('.xiu').hide();
+  $('.success').show();
+})
+
+
+/*****邮箱验证----点击立即验证*****/
+//获取验证码---点击切换60秒
+$(function () {
+  $('.get').click(function () {
+    var count = 60;
+    var countdown = setInterval(CountDown, 1000);
+    function CountDown() {
+      $(".get").attr("disabled", true);
+      $("input.get").css("background","#666");
+      $(".get").val(count + " 秒后重新获取");
+      if (count == 0) {
+        $(".get").val("获取验证码").removeAttr("disabled");
+        $("input.get").css("background","#1d4f36");
+        clearInterval(countdown);
+      }
+      count--;
+    }
+  })
+});
+
+// 1、验证身份
+$('.eamil_one').show();
+// 2、验证邮箱
+$('.next1').click(function(){
+  $('.eamil_one').hide();
+  $('.eamil_two').show();
+})
+  /*已验证手机（以下几部分一样）*/
+  $('.cell').html('132*****720');
+// 3、完成
+$('.next2').click(function(){
+  $('.eamil_two').hide();
+  $('.eamil_three').show();
+})
+
+/*****手机验证----点击修改*****/
+// 手机号码
+$('.hao').html('132*****720');
+
+// 1、验证身份
+$('.phone_one').show();
+// 2、修改已验证手机
+$('.next1_phone').click(function(){
+  $('.phone_one').hide();
+  $('.phone_two').show();
+})
+// 3、完成
+$('.next2_phone').click(function(){
+  $('.phone_two').hide();
+  $('.phone_three').show();
+})
+
+
+/*****密保问题----点击马上设置*****/
+// 1、验证身份
+$('.pwd_one').show();
+// 2、修改已验证手机
+$('.next1_pwd').click(function(){
+  $('.pwd_one').hide();
+  $('.pwd_two').show();
+})
+// 3、完成
+$('.next2_pwd').click(function(){
+  $('.pwd_two').hide();
+  $('.pwd_three').show();
+})
+
+/******支付密码----点击修改*****/
+// 1、验证身份
+$('.alter_one').show();
+// 2、修改支付密码
+    /*设置支付密码*/
+    $('.next1_payment').click(function(){
+      $('.alter_one').hide();
+      $('.alter_two').show();
+      $('.set_pwd').show();
+    })
+    /*设置原支付密码*/
+    // $('.next1_payment').click(function(){
+    //   $('.alter_one').hide();
+    //   $('.alter_two').show();
+    //   $('.original_pwd').show();
+    // })
+// 3、完成
+$('.next2_payment').click(function(){
+  $('.alter_two').hide();
+  $('.alter_three').show();
+})
+
+/******支付密码----点击重置*****/
+// 1、验证身份
+$('.reset_one').show();
+// 2、验证密保问题
+$('.next1_reset').click(function(){
+  $('.reset_one').hide();
+  $('.reset_two').show();
+})
+// 3、重置支付密码
+$('.next2_reset').click(function(){
+  $('.reset_two').hide();
+  $('.reset_three').show();
+})
+// 4、完成
+$('.next3_reset').click(function(){
+  $('.reset_three').hide();
+  $('.reset_four').show();
+})
+
+// 微信绑定
+$('.weixin').click(function(){
+  $('.weixin_fixed').show();
+})
+$('.weixin_fixed span').click(function(){
+  $('.weixin_fixed').hide();
+})
+
+/******************收货地址*******************/
+
+/**删除按钮 点击删除显示删除按钮遮罩层**/
+var that;
+$('.delete').on('click',function(){
+  $('.delete_btn').show();
+  that = $(this);
+})
+/**删除按钮遮罩层 点击确定删除**/
+$('.enter').on('click',function(){
+  that.parent().parent().remove();
+  $('.delete_btn').hide();
+})
+/**删除按钮遮罩层  ×与取消点击关闭**/
+$('.right').click(function(){
+  $('.delete_btn').hide();
+})
+$('.off').click(function(){
+  $('.delete_btn').hide();
+})
+
+// 地址列表----已保存和还能保存 多少条地址
+  $('.yet').html('5');
+  $('.gpce').html('15');
+
+//默图标点击设为默认切换
+$('.default').on('click',function(){
+  $(this).parent().next().css('display','block');
+  $(this).parent().parent().siblings().children('div:last-child').css('display','none');
+})
+
+/***收货地址----2**/
+// 删除
+$('.adr_delete').click(function(){
+  $('.del_fiex').show();
+})
+$('.adr_off').click(function(){
+  $('.del_fiex').hide();
+})
+$('.adr_x').click(function(){
+  $('.del_fiex').hide();
+})
+// 修改、新增
+$('.adr_alter').click(function(){
+  $('.alter_fiex').show();
+  $('.adr_text').html("修改地址");
+})
+$('.alter_x').click(function(){
+  $('.alter_fiex').hide();
+})
+$('.alter_off').click(function(){
+  $('.alter_fiex').hide();
+})
+$('.add_address').click(function(){
+  $('.alter_fiex').show();
+  $('.adr_text').html("新增地址");
+})
+
+
+/*****************我的积分******************/
+//点击积分明细切换标签页
+$('#tab li').click(function(){
+    var $this = $(this);
+    var $t = $this.index();
+    $('#tab li').removeClass();
+    $this.addClass('ac_active');
+    $('#content>div').css('display','none');
+    $('#content>div').eq($t).css('display','block');
+})
+// 为您推荐部分点击切换标签页
+$('#tabs li').click(function(){
+    var $thiss = $(this);
+    var $ts = $thiss.index();
+    $('#tabs li').removeClass();
+    $thiss.addClass('ac_active');
+    $('#contents>div').css('display','none');
+    $('#contents>div').eq($ts).css('display','block');
+})
+// 为您推荐左右按键切换
+$(".next").click(function () {
+    var b = $(".list ul>li:first"), c = $(".list ul .current").index();
+    $(".list ul>li:last").after(b);
+    $(".list ul li").removeClass("current");
+    $(".list ul").find("li").eq(c).addClass("current")
+  });
+  $(".prev").click(function () {
+    var c = $(".list ul>li:last"), b = $(".list ul .current").index();
+    $(".list ul>li:first").before(c);
+    $(".list ul li").removeClass("current");
+    $(".list ul").find("li").eq(b).addClass("current")
+  })
+// 最近浏览左右按键切换
+$(".next").click(function () {
+    var b = $(".l_list ul>li:first"), c = $(".l_list ul .current").index();
+    $(".l_list ul>li:last").after(b);
+    $(".l_list ul li").removeClass("current");
+    $(".l_list ul").find("li").eq(c).addClass("current")
+  });
+  $(".prev").click(function () {
+    var c = $(".l_list ul>li:last"), b = $(".l_list ul .current").index();
+    $(".l_list ul>li:first").before(c);
+    $(".l_list ul li").removeClass("current");
+    $(".l_list ul").find("li").eq(b).addClass("current")
+  })
+
+
+/********************注册*****************/
+//点击密码右侧的按钮显示明文
+$('.butn1').click(function(){
+  $('.butn1').hide();
+  $('.butn2').show();
+})
+//点击密码右侧的按钮显示密文
+$('.butn2').click(function(){
+  $('.butn1').show();
+  $('.butn2').hide();
+})
+
+/*****************忘记密码******************/
+// 1、确认账号
+$('.forget_pwd_one').show();
+// 2、安全验证
+// $('.forget_pwd_two').show();
+$('.next1_reg').click(function(){
+  $('.forget_pwd_one').hide();
+  $('.forget_pwd_two').show();
+})
+// 3、重设密码
+$('.next2_reg').click(function(){
+  $('.forget_pwd_two').hide();
+  $('.forget_pwd_three').show();
+})
+// 4、完成
+$('.next3_reg').click(function(){
+  $('.forget_pwd_three').hide();
+  $('.forget_pwd_four').show();
+})
+
+
+/*****************我的订单******************/
+
+//点击全部订单、待付款等切换标签页
+$('.order_tab li a').click(function(){
+    var $a = $(this);
+    $('.order_tab li a').removeClass();
+    $a.addClass('ac_active');
+})
+$('.order_tab li').click(function(){
+    var $a = $(this);
+    var $d = $a.index();
+    $('#order_content>div').css('display','none');
+    $('#order_content>div').eq($d).css('display','block');
+})
+
+// 评价(点击‘+’号上传图片后的样式)
+// $('.add_pic').click(function(){
+//   $('.up_pic').hide();
+//   $('.before_pic').show();
+// })
+
+//星星评价等级
+$('.star>span>img').on('click',function(){
+  $(this).css('background-image','url(../img/starsy.png)').prevAll().css('background-image',
+    'url(../img/starsy.png)');
+  $(this).nextAll().css('background-image','url(../img/starky.png)');
+})
+
+/*****************商品详情页******************/
+// 商品详情图片自动切换
+$(function() {
+  var len = $(".icon_list>li>img").length;
+  var index = 0;
+  var picTimer;
+
+  $(".icon_list>li>img").click(function() {
+    index = $(".icon_list>li>img").index(this);
+    showPic(index);
+  });
+
+  $(".big_pic").hover(function() {
+    clearInterval(picTimer);
+  },function() {
+    picTimer = setInterval(function() {
+      showPic(index);
+      index++;
+      if(index==len) {index=0;}
+    },3000);
+  }).trigger("mouseleave");
+
+  function showPic(index) {
+    $(".big_pic>img").removeClass("selected").eq(index).addClass("selected");
+    $(".icon_list>li>img").removeClass("hover").eq(index).addClass("hover");
+  }
+});
+//规格选择
+// $('.nature>div>a').click(function() {
+//     var $this = $(this);
+//     var $t = $this.index(this);
+//     $this.siblings().removeClass('mi');
+//     $this.toggleClass('mi');
+//     if($this.hasClass('dashed')){
+//         $this.removeClass('mi');
+//     }
+// });
+// $('.door').click(function() {
+//     var $this = $(this);
+//     $this.toggleClass('mi');
+//     $('.door>img').toggle();
+// });
+
+
+//团购商品详情
+//收藏
+//收藏
+$('.not_icon').click(function () {
+    $(this).hide();
+    $('.yet_icon').show();
+    $('.icon_fixed').show();
+});
+$('.icon_fixed>div>p>span').click(function () {
+    $('.icon_fixed').hide();
+});
+//规格选择
+//$('.nature1>div>a').click(function() {
+//    var $this = $(this);
+//    var $t = $this.index(this);
+//    $this.siblings().removeClass('mi1');
+//    $this.toggleClass('mi1');
+//    if($this.hasClass('dashed1')){
+//        $this.removeClass('mi1');
+//    }
+//});
+//$('.door1').click(function() {
+//    var $this = $(this);
+//    $this.toggleClass('mi1');
+//    $('.door1>img').toggle();
+//});
+
+
+//详情与晒单评价切换
+$('.detail_evaluate li').click(function(){
+    var $thiss = $(this);
+    var $ts = $thiss.index();
+    $('.detail_evaluate li').removeClass();
+    $thiss.addClass('detail_qie');
+    $('#all_contet>div').css('display','none');
+    $('#all_contet>div').eq($ts).css('display','block');
+})
+
+//全部与有图圆点切换
+$('.cycl').on('click',function(){
+  $(this).children().addClass('solid_bg');
+  $(this).next().addClass('text_bg');
+  $(this).parent().siblings().children(':first-child').children().removeClass('solid_bg');
+  $(this).parent().siblings().children(':last-child').removeClass('text_bg');
+})
+
+//我要推广
+$('.generalize_btn').click(function(){
+  $('.gener_fixed').show();
+})
+$('.gener_x>span').click(function(){
+  $('.gener_fixed').hide();
+})
+
+/*****************商城列表******************/
+//商品筛选切换
+$('.brand>li>a').click(function() {
+    var $this = $(this);
+    var $t = $this.index(this);
+    $this.parent().siblings().children().removeClass('screen');
+    $this.addClass('screen');
+});
+////销量、人气、价格切换
+//$('.pag_list>div.align').click(function(){
+//    var $this = $(this);
+//    $('.pag_list>div.align').removeClass('xiao').children(':first-child').show().next().hide();
+//    $this.addClass('xiao').children(':first-child').hide().next().show();
+//})
+
+
+/*****************结算******************/
+// 点击新建地址
+$('.new_d').click(function(){
+    $('.new_adr').show();
+    $('.default_adr').hide();
+})
+//点击显示全部地址
+//$('.all_adr>a').click(function(){
+//    $('.all_adrs').toggle();
+//    if($('.all_adrs').css("display")=='block'){
+//      $(this).html('收起全部地址');
+//    }else{
+//      $(this).html('显示全部地址');
+//    }
+//})
+//余额
+//$('.test>input').click(function(){
+//    $('.test>span').toggle();
+//})
+
+/*****************支付******************/
+// 银行卡支付
+$('.ka_child>a').click(function(){
+    var $this = $(this);
+    $this.addClass('ac_child').siblings().removeClass('ac_child');
+    $this.children(':last-child').show();
+    $this.siblings().children(':last-child').hide();
+})
+$('.ka').click(function(){
+    $('.ka_child').show();
+})
+$('.zhi').click(function(){
+    $('.ka_child').hide();
+})
+$('.wei').click(function(){
+    $('.ka_child').hide();
+})
+//支付时间
+$(function () {
+     
+  });
+
+/*****************晒单评价******************/
+// 标签切换
+$('ul.tal_evaluation>li').click(function(){
+    var $thiss = $(this);
+    var $ts = $thiss.index();
+    $('ul.tal_evaluation>li').removeClass();
+    $thiss.addClass('ev_active');
+    $('#ev_content>div').css('display','none');
+    $('#ev_content>div').eq($ts).css('display','block');
+})
+/*****************支付倒计时******************/
+
+var spcountdownto;
+var spm = 19;
+var sps = 59;
+var spdays = 0;//相差天数
+var sphours = 0;//相差小时数
+function DoPayTime(iptLastTime, iptIsOverTime,currentTime) {
+
+    var startDate = new Date(iptLastTime.replace("T", " "));//开始时间
+    var endDate = new Date(currentTime.replace("T", " "));//结束时间
+
+    var date3 = endDate.getTime() - startDate.getTime();   //时间差的毫秒数        
+    //计算出相差天数  
+      spdays = Math.floor(date3 / (24 * 3600 * 1000));
+
+    //计算出小时数  
+
+    var leave1 = date3 % (24 * 3600 * 1000)    //计算天数后剩余的毫秒数  
+      sphours = Math.floor(leave1 / (3600 * 1000))
+    //计算相差分钟数  
+    var leave2 = leave1 % (3600 * 1000)        //计算小时数后剩余的毫秒数  
+    var minutes = Math.floor(leave2 / (60 * 1000))
+    //计算相差秒数  
+    var leave3 = leave2 % (60 * 1000)      //计算分钟数后剩余的毫秒数  
+    var seconds = Math.round(leave3 / 1000)
+    //alert(" 相差 " + spdays + "天 " + sphours + "小时 " + minutes + " 分钟" + seconds + " 秒")
+    if (spcountdownto)
+    {
+        clearInterval(spcountdownto);//停止计时
+    }
+    if (parseInt(spdays) == 0 && parseInt(sphours) == 0 && parseInt(minutes) > 20) {
+        iptIsOverTime == "TRUE";
+    } 
+    if (iptIsOverTime == "TRUE") {
+        $('.at_time').html("");
+        $('.at_text').html("付款超时");
+        $('.at_money').css('background', '#ccc');
+
+        $(".btn_paysumbit").attr("title", "付款超时");
+        $("#iptIsOverTimeAction").val("true");
+    } else { 
+        spm = 19 - minutes;
+        sps = 59 - seconds;
+        //spm = minutes;
+        //sps = seconds;
+         spcountdownto = setInterval(CountDownTimeOut, 1000); 
+    }
+}
+function CountDownTimeOut() {
+
+    if (sps < 10) {
+        //如果秒数少于10在前面加上0
+        $('.at_time').html(spm + '分0' + sps + '秒');
+        //console.log(spm + '分0' + sps + '秒');
+    } else {
+        $('.at_time').html(spm + '分' + sps + '秒');
+        //console.log(spm + '分' + sps + '秒');
+    }
+    sps--;
+    if (sps < 0) {
+        //如果秒数少于0就变成59秒
+        sps = 59;
+        spm--;
+    };
+    if (parseInt(sps) < 0 || parseInt(spm) < 0) {
+        //console.log("已经停止");
+        //console.log("此时：" + m + '分' + s + '秒');
+        clearInterval(spcountdownto);//停止计时
+    }
+    if (parseInt(spm) == 0 & parseInt(sps) == 0) {
+        $('.at_time').html("");
+        $('.at_text').html("付款超时");
+        $('.at_money').css('background', '#ccc');
+        $("#iptIsOverTimeAction").val("true");
+        //console.log("已经停止");
+        //console.log("此时：" + spm + '分' + sps + '秒');
+        clearInterval(spcountdownto);//停止计时
+    }
+}
+/*********退货退款*************/
+// 买家物流货件给商家
+$('.fill_in>a').click(function(){
+    $('.cargo_fiex').show();
+})
+$('.log_title>span').click(function(){
+    $('.cargo_fiex').hide();
+})
+
+//页面切换
+$('.sub_for').click(function(){
+  $('.cargo_one').hide();
+  $('.cargo_two').show();
+})
+$('.out_for').click(function(){
+  $('.cargo_two').hide();
+  $('.cargo_three').show();
+})
+$('.log_confirm').click(function(){
+  $('.cargo_three').hide();
+  $('.cargo_four').show();
+})
+$('.make_goods').click(function(){
+  $('.cargo_four').hide();
+  $('.cargo_five').show();
+})
+
+// 申请退款
+$(function () {
+    var d=5;
+    var h=23;
+    var m=59;
+    var s=59;
+    var countdown = setInterval(CountDown,1000);
+    function CountDown() {
+        if(s<10){
+      //如果秒数少于10在前面加上0
+        $('.time_color').html(d+'天'+h+'时'+m+'分0'+s+'秒');
+      }else{
+        $('.time_color').html(d+'天'+h+'时'+m+'分'+s+'秒');
+      }
+      s--;
+      if(s<0){
+        s=59;
+        m--;
+      };
+      if(m<0){
+        m=59;
+        h--;
+      };
+      if(h<0){
+        h=23;
+        d--;
+      };
+      if(d==0&h==0&m==0&s==0){
+        $('.time_color').html(d+'天'+h+'时'+m+'分'+s+'秒');
+        clearInterval(countdown);
+      }
+    }
+  });
+// 换货
+$(function () {
+    var d=4;
+    var h=23;
+    var m=59;
+    var s=59;
+    var countdown = setInterval(CountDown,1000);
+    function CountDown() {
+        if(s<10){
+      //如果秒数少于10在前面加上0
+        $('.make_time').html('还剩余'+d+'天'+h+'时'+m+'分0'+s+'秒'+'自动确认收货');
+      }else{
+        $('.make_time').html('还剩余'+d+'天'+h+'时'+m+'分'+s+'秒'+'自动确认收货');
+      }
+      s--;
+      if(s<0){
+        s=59;
+        m--;
+      };
+      if(m<0){
+        m=59;
+        h--;
+      };
+      if(h<0){
+        h=23;
+        d--;
+      };
+      if(d==0&h==0&m==0&s==0){
+        $('.make_time').html('还剩余'+d+'天'+h+'时'+m+'分'+s+'秒'+'自动确认收货');
+        clearInterval(countdown);
+      }
+    }
+  });
+
+/*********首页*********/
+//顶部广告
+$('#banner_top>span').click(function(){
+  $('#banner_top').hide();
+});
+$('.second_level').hover(
+  function(){
+    $(this).parent().addClass('li_bg');
+  },function(){
+    $(this).parent().removeClass('li_bg');
+  }
+);
+//精品推荐切换
+$('.recom_tab li').mouseenter(function(){
+    var $thiss = $(this);
+    var $ts = $thiss.index();
+    $('.recom_tab li').removeClass();
+    $thiss.addClass('recom_active');
+    $('.recom_centent>ul').css('display','none');
+    $('.recom_centent>ul').eq($ts).css('display','block');
+})
+//图标切换
+ $('.product_nav>ul>li').mouseenter(function() {
+     var index = $(".product_nav>ul>li").index(this);
+     var $Img = $(".product_nav>ul>li img");
+     var imgTxt = "<img src='../img/one" + index + ".png' alt='' />";
+     $(this).css({"background":"#fff","color":"#489869"}).siblings().css({"background":"#f4f4f4","color":"#666"});
+     $(this).children('').css("color","#489869").parent().siblings().children('').css("color","#666");
+     $Img.eq(index).replaceWith(imgTxt);
+     $(this).siblings().each(function () {
+          var $Imgs = $(this).find("img");
+          var Ind = $(".product_nav>ul>li").index(this);
+          $Imgs.attr("src", "../img/ch" + Ind + ".png");
+      });
+ });
+ $('.product_nav>ul>li').mouseleave(function() {
+     var index = $(".product_nav>ul>li").index(this);
+     var $Img = $(".product_nav>ul>li img");
+     var imgTxt = "<img src='../img/ch" + index + ".png' alt='' />";
+     $(this).css({"background":"#f4f4f4","color":"#489869"}).siblings().css({"background":"#f4f4f4","color":"#666"});
+     $(this).children('').css("color","#666").parent().siblings().children('').css("color","#666");
+     $Img.eq(index).replaceWith(imgTxt);
+     $(this).siblings().each(function () {
+          var $Imgs = $(this).find("img");
+          var Ind = $(".product_nav>ul>li").index(this);
+          $Imgs.attr("src", "../img/ch" + Ind + ".png");
+      });
+ });
+ //风格分类
+ $('.style_tab>p').mouseenter(function(){
+    var $this = $(this);
+    var $t = $this.index();
+    $('.style_tab>p').removeClass();
+    $this.addClass('tab_color');
+    $('.style_content>div').css('display','none');
+    $('.style_content>div').eq($t).css('display','block');
+})
+
+
+/**********领券中心**************/
+//$('.get_coupon').click(function(){
+//  $('.coupon_tier').show();
+//})
+$('.success_x>span').click(function(){
+  $('.coupon_tier').hide();
+})
+$('.coupon_close').click(function(){
+  $('.coupon_tier').hide();
+})
+
+/************我的钱包*************/
+$('.purse_tab li').click(function () {
+    var $this = $(this);
+    var $t = $this.index();
+    $('.purse_tab li').removeClass();
+    $this.addClass('purse_active');
+    $('.purse_content>div').css('display', 'none');
+    $('.purse_content>div').eq($t).css('display', 'block');
+})
+
+//$('.withdraw').click(function(){
+//  $('.coupon_tier').show();
+//})
+
+// 充值
+$('.cash_tab li').click(function(){
+    var $this = $(this);
+    var $t = $this.index();
+    $('.cash_tab li').removeClass();
+    $this.addClass('cash_li_color');
+    $('.top_up_content>div').css('display','none');
+    $('.top_up_content>div').eq($t).css('display','block');
+})
+
+
+/************申请成为平台设计师*************/
+$('.want').click(function(){
+  $('.stylist').hide();
+  $('.stylist_message').show();
+})
+
+//$('.stylist_sub>a').click(function () {
+//    if ($("#submitForm").valid()) {
+//        $('.coupon_tier').show();
+//    }
+//})
+
+
+/************申请定制商品*************/
+//$('.customized_sub>a').click(function(){
+//  $('.coupon_tier').show();
+//})
+
+
+/************我的消息*************/
+$('.message_inform').click(function(){
+  var $this = $(this);
+  var $t = $this.index(this);
+  $this.parent().siblings().eq($t).toggle();
+  $this.eq($t).css("color","#999");
+})
+
+
+/************服务与支持*************/
+$('.support_tab li').click(function(){
+    var $this = $(this).children('a');
+    var $t = $this.parent().index();
+    $('.support_tab li').children('a').removeClass().next().show().next().hide();
+    $this.addClass('support_color').next().hide().next().show();
+    $('.support_content>div').css('display','none');
+    $('.support_content>div').eq($t).css('display','block');
+})
+
+/*我的优惠券*/
+/*$('.coupon_omit>img').hover(
+  function(){
+    $(this).next().show();
+  },function(){
+    $(this).next().hide();
+  }
+);
+$('.coupon_omit>p').hover(
+  function(){
+    $(this).next().next().show();
+  },function(){
+    $(this).next().next().hide();
+  }
+);
+*/
+// 返回顶部
+ $(function(){
+    var nav=$("#top"); //得到导航对象
+    var win=$(window); //得到窗口对象
+    var sc=$(document);//得到document文档对象。
+    win.scroll(function(){
+       if(sc.scrollTop()>=800){
+         nav.css("display","block");
+       }else{
+        nav.css("display","none");
+       }
+    });
+    nav.hover(
+      function(){
+        $(this).children().eq(0).hide().next().show();
+    },function(){
+        $(this).children().eq(0).show().next().hide();
+    });
+ })
+
+// 首页轮播
+$(function(){
+    //圆点
+    var imgs=$('.banner_pic li');
+    for(var j=0,idxsHTML="";j<imgs.length;j++){
+        idxsHTML+='<li></li>';
+    };
+    $('.position').html(idxsHTML);
+    //第一张显示
+    $(".banner_pic li").eq(0).show();
+    $(".position li").eq(0).addClass('cur');
+    //鼠标滑过圆点手动切换，淡入淡出
+    $(".position li").mouseover(function() {
+        $(this).addClass('cur').siblings().removeClass("cur");
+        var index = $(this).index();
+        i = index;
+        $(".banner_pic li").eq(index).fadeIn(500).siblings().fadeOut(500);
+    });
+    //自动轮播
+    var b=$('.banner_pic li').length-1;
+    var i=0;
+    var timer=setInterval(play,4000);
+    //向右切换
+    var play=function(){
+        i++;
+        i = i > b ? 0 : i ;
+        $(".position li").eq(i).addClass('cur').siblings().removeClass("cur");
+        $(".banner_pic li").eq(i).fadeIn(500).siblings().fadeOut(500);
+    }
+    //鼠标移入移出效果
+    $(".banner").hover(function() {
+        clearInterval(timer);
+    }, function() {
+        timer=setInterval(play,4000);
+    });
+    //加载完成执行轮播
+    $(".banner").ready(function() {
+       timer=setInterval(play,4000);
+    });
+});
+
+/*发票*/
+$('.bill_tab li').click(function(){
+    var $this = $(this);
+    var $t = $this.index();
+    $('.bill_tab li').removeClass();
+    $this.addClass('bill_color');
+    $('.bill_content li').hide();
+    $('.bill_content li').eq($t).show();
+})
+$('.open input').click(function(){
+    $('.bill_warp').toggle();
+})
+
+// 菜单栏
+$(function () {
+    $('.warp_nav').mouseleave(function () {
+        $('.stair_nav li').removeClass('stair_bg');
+    });
+    $('.stair_nav li').mouseover(function () {
+        var $this = $(this);
+        var $t = $this.index();
+        $('.stair_nav li').removeClass('stair_bg');
+        $this.addClass('stair_bg');
+        $('.second_nav li').find('a').css('color', '#999');
+        $('.second_nav li').eq($t).scrollTop(100).find('a').css('color', '#1d4f36');
+    });
+    $('.second_nav li').mouseover(function () {
+        var $this = $(this);
+        var $t = $this.index();
+        $('.second_nav li').find('a').css('color', '#999');
+        $this.find('a').css('color', '#1d4f36');
+        $('.stair_nav li').removeClass('stair_bg');
+        $('.stair_nav li').eq($t).addClass('stair_bg');
+    });
+})

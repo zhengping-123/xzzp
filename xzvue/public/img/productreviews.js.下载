@@ -1,0 +1,37 @@
+
+/****
+描述：商品评论脚本 
+创建：IVAN
+时间：2017.06.20
+***/
+
+function getProductReviewListExt(storeid, pid, page, type, proname) {
+    getProductReviewListAjax(storeid, pid, page, type);
+}
+
+function getProductReviewListMore(storeid, pid, page, type, startnum, endnum) {
+    $.get("/catalog/ProductReviewListAjax?storeid=" + storeid + "&pid=" + pid + "&reviewType=" + type + "&page=" + page + "&startnum=" + startnum + "&endnum=" + endnum, getProductReviewListResponseAjax)
+}
+
+//获得商品评价列表
+function getProductReviewListAjax(storeid, pid, page, type) {
+    $.get("/catalog/ProductReviewListAjax?storeid=" + storeid + "&pid=" + pid + "&reviewType=" + type + "&page=" + page, getProductReviewListResponseAjax)
+}
+
+//处理获得商品评价的反馈信息
+function getProductReviewListResponseAjax(data) {
+    $("#divProductReviewList").html(data);
+}
+
+function changeReviewTypeAjax(storeid, pid, page, type) {
+    if (type == 0) {
+        $(".all_score li span").eq(0).addClass("text_bg");
+        $(".all_score li span").eq(1).removeClass("text_bg");
+        getProductReviewListAjax(storeid, pid, page, 0);
+    }
+    else {
+        $(".all_score li span").eq(0).removeClass("text_bg");
+        $(".all_score li span").eq(1).addClass("text_bg");
+        getProductReviewListAjax(storeid, pid, page, 1);
+    }
+}
